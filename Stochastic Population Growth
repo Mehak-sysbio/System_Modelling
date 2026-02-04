@@ -1,0 +1,29 @@
+#Logistic Growth on a Petri Dish
+import numpy as np
+import matplotlib.pyplot as plt
+def simulate_population(no, birth, death,k, time):
+  n=no
+  population= [n]
+  for t in range(time):
+    effective_birth= birth*(1-n/k)
+    effective_birth= max(effective_birth,0)
+    births= np.random.poisson(effective_birth*n)
+    deaths=np.random.poisson(death*n)
+    n= n+birth-deaths
+    n=max(n,0)
+    population.append(n)
+  return population
+def main():
+  no= int(input("Enter initial population:"))
+  birth= float(input("Enter the birth rate, eg 0.1 for 10%"))
+  death= float(input("Enter the death rate, eg 0.1 for 10%"))
+  k=int(input("carrying capacity of petri dish: "))
+  time= int(input("Enter the time for the experiment is observed"))
+  result=simulate_population(no, birth, death,k, time)
+  return result
+result=main()
+plt.plot(result)
+plt.xlabel("Time")
+plt.ylabel("Number of Cells")
+plt.title("Stochastic Cell Growth on a petri dish")
+plt.show()
