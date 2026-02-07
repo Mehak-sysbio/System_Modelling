@@ -1,0 +1,22 @@
+#Toy Gene Regulation Model: ON–OFF Gene Expression
+#This models how a gene’s expression level changes over time depending on regulation.Toy Gene Regulation Model: ON–OFF Gene Expression
+
+def predict(num,p,d,steps,gene_on):
+  mRNA=num
+  for day in range(1,steps+1):
+    if gene_on:
+      mRNA= mRNA+p-d*mRNA
+    else: 
+      mRNA=mRNA-d*mRNA
+    if mRNA<0:
+      mRNA=0
+    print(f"Time {day}: mRNA level = {mRNA:.2f}")
+
+def main():
+  num=float(input("Enter the initial number of mRNA:"))
+  p=float(input("Enter the production rate:"))
+  d=float(input("Enter the degradation rate:"))
+  steps=int(input("Enter the number of steps:"))
+  gene_on=input("is the gene on? (yes/no):").lower()=="yes"
+  predict(num,p,d,steps, gene_on)
+main()
