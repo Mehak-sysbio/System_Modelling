@@ -1,0 +1,29 @@
+# logistic_growth.py
+A simple example of a mathematical model being used in biology to describe population dynamics under limited resources.
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+r = 0.4        # growth rate
+K = 1000       # carrying capacity
+N0 = 50        # initial population
+t_max = 50
+dt = 0.1
+
+# Time array
+t = np.arange(0, t_max, dt)
+
+# Population array
+N = np.zeros(len(t))
+N[0] = N0
+
+# Euler method
+for i in range(1, len(t)):
+    N[i] = N[i-1] + r * N[i-1] * (1 - N[i-1]/K) * dt
+
+# Plot
+plt.plot(t, N)
+plt.xlabel("Time")
+plt.ylabel("Population")
+plt.title("Logistic Growth Model")
+plt.show()
